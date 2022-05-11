@@ -27,11 +27,45 @@ def ordenarCaracteres(caracteres):
 def asignarCaracteres(caracteres,frecuencia):
     for i in range(len(caracteres)):
         caracteres[i].frecuencia = frecuencia[i]
+        caracteres[i].frecuencia.replace(" ","")
     return caracteres
 
-mensajeEncriptado = "53‡‡†305))6*;4826)4‡.)4‡);806*;48†8¶60))85;1‡(;:‡*8†83(88)5*†;46(;88*96*;8)*‡(;485);5 *†2:*‡ (;4956*2(5*—4)8¶8*;4069285);)6†8)4‡‡;1 (‡9;48081;8:8‡1;48†85;4)485†528806 *81(‡9;48;(88;4(‡?34; 48)4‡;161;:188;‡?;"
-frequency = ["e","s","t","u","d","i","a","b","c","f","f","h","j","k","l","m","n","o","p","q","r","v","w","x","y"]
+def descifrar(codigo, mensaje):
+    for m in range(len(mensaje)):
+        for c in range(len(codigo)):
+            # print("[", codigo[c].dato , "] = [",mensaje[m],"]")
+            if mensaje[m] == codigo[c].dato:
+                # print(codigo[c].frecuencia)
+                # mensaje[m].replace(codigo[c].frecuencia)
+                # print("hola")
+                # print("[", codigo[c].frecuencia , "] = [",mensaje[m],"]")
+                break;
+            else:
+                continue
+    print(mensaje)
+            
+
+mensajeEncriptado = "53‡‡†305))6*;4826)4‡.)4‡);806*;48†8¶60))85;1‡(;:‡*8†83(88)5*†;46(;88*96*?;8)*‡(;485);5*†2:*‡(;4956*2(5*—4)8¶8*;4069285);)6†8)4‡‡;1(‡9;48081;8:8‡1;48†85;4)485†528806*81(‡9;48;(88;4(‡?34.48)4‡;161;:188;‡?;"
+# frequency = ["e","s","t","u","d","i","a","b","c","f","g","h","j","k","l","m","n","o","p","q","r","v","w","x","y"]
+frequency = "etaoinshrdlcumwfgypbvkjxqz"
 
 caracteres = dividirCaracteres(mensajeEncriptado)
+
+# for i in range(len(caracteres)):
+#     print("[",caracteres[i].dato,"][",caracteres[i].frecuencia,"]")
+
 caracteres = ordenarCaracteres(caracteres)
+
+print("********************************************************")
+
+for i in range(len(caracteres)):
+    print("[",caracteres[i].dato,"][",caracteres[i].frecuencia,"]")
+
 codigo = asignarCaracteres(caracteres,frequency)
+
+print("********************************************************")
+
+for i in range(len(codigo)):
+    print("[",codigo[i].dato,"][",codigo[i].frecuencia,"]")
+
+descifrar(codigo, mensajeEncriptado)
