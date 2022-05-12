@@ -27,22 +27,15 @@ def ordenarCaracteres(caracteres):
 def asignarCaracteres(caracteres,frecuencia):
     for i in range(len(caracteres)):
         caracteres[i].frecuencia = frecuencia[i]
-        caracteres[i].frecuencia.replace(" ","")
     return caracteres
 
-def descifrar(codigo, mensaje):
+def desencriptar(mensaje,codigo):
+    desencriptado = ""
     for m in range(len(mensaje)):
-        for c in range(len(codigo)):
-            # print("[", codigo[c].dato , "] = [",mensaje[m],"]")
-            if mensaje[m] == codigo[c].dato:
-                # print(codigo[c].frecuencia)
-                # mensaje[m].replace(codigo[c].frecuencia)
-                # print("hola")
-                # print("[", codigo[c].frecuencia , "] = [",mensaje[m],"]")
-                break;
-            else:
-                continue
-    print(mensaje)
+            for n in range(len(codigo)):
+                if mensaje[m] == codigo[n].dato:
+                    desencriptado += codigo[n].frecuencia   
+    print(desencriptado)
             
 
 mensajeEncriptado = "53‡‡†305))6*;4826)4‡.)4‡);806*;48†8¶60))85;1‡(;:‡*8†83(88)5*†;46(;88*96*?;8)*‡(;485);5*†2:*‡(;4956*2(5*—4)8¶8*;4069285);)6†8)4‡‡;1(‡9;48081;8:8‡1;48†85;4)485†528806*81(‡9;48;(88;4(‡?34.48)4‡;161;:188;‡?;"
@@ -56,16 +49,17 @@ caracteres = dividirCaracteres(mensajeEncriptado)
 
 caracteres = ordenarCaracteres(caracteres)
 
-print("********************************************************")
+# print("********************************************************")
 
-for i in range(len(caracteres)):
-    print("[",caracteres[i].dato,"][",caracteres[i].frecuencia,"]")
+# for i in range(len(caracteres)):
+
+#     print("[",caracteres[i].dato,"][",caracteres[i].frecuencia,"]")
 
 codigo = asignarCaracteres(caracteres,frequency)
 
-print("********************************************************")
+# print("********************************************************")
 
-for i in range(len(codigo)):
-    print("[",codigo[i].dato,"][",codigo[i].frecuencia,"]")
+# for i in range(len(codigo)):
+#     print("[",codigo[i].dato,"][",codigo[i].frecuencia,"]")
 
-descifrar(codigo, mensajeEncriptado)
+desencriptar(mensajeEncriptado,codigo)
