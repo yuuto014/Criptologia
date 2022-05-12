@@ -52,14 +52,14 @@ caracteres = ordenarCaracteres(caracteres)
 
 # print("********************************************************")
 
-for i in range(len(caracteres)):
-    print("[",caracteres[i].dato,"][",caracteres[i].frecuencia,"]")
+# for i in range(len(caracteres)):
+#     print("[",caracteres[i].dato,"][",caracteres[i].frecuencia,"]")
 
 codigo = asignarCaracteres(caracteres,frequency)
 
-print("********************************************************")
+# print("********************************************************")
 
-for i in range(len(codigo)):
-    print("[",codigo[i].dato,"][",codigo[i].frecuencia,"]")
+# for i in range(len(codigo)):
+#     print("[",codigo[i].dato,"][",codigo[i].frecuencia,"]")
 
 desencriptar(mensajeEncriptado,codigo)
