@@ -34,8 +34,12 @@ def desencriptar(mensaje,codigo):
     for m in range(len(mensaje)):
             for n in range(len(codigo)):
                 if mensaje[m] == codigo[n].dato:
-                    desencriptado += codigo[n].frecuencia   
-    print(desencriptado)
+                    if codigo[n].asignacion == "":
+                        desencriptado += mensaje[m] 
+                    else:
+                        desencriptado += codigo[n].asignacion 
+                    break  
+    return desencriptado
 
 def asignarCaracter(caracteres,frecuencia):
     for c in range(len(caracteres)):
@@ -52,7 +56,7 @@ def frecuenciaTabla(caracteres, frecuencia):
         if c.asignacion != "":
             caracteresAsignados.append(c.asignacion)
     for f in frecuencia:
-        frecuenciaBigrama.append(TablaFrecuencia(f,0))
+        frecuenciaCaracteres.append(TablaFrecuencia(f,0))
 
     for b in frecuenciaCaracteres:
         for c in caracteresAsignados:
@@ -60,19 +64,40 @@ def frecuenciaTabla(caracteres, frecuencia):
                 b.frecuencia += 1
 
     frecuenciaCaracteres = ordenarCaracteres(frecuenciaCaracteres)
-    imprimirTablaAsignacion(frecuenciaCaracteres)
+    return frecuenciaCaracteres 
 
-def asignarCaracteres(caracteres, frecuenciaCaracteres):
-    
+def asignarCaracteres(mensaje, frecuenciaCaracteres):
+    listaCaracteres  = []
     for f in frecuenciaCaracteres:
-        if f.frecuencia > 0:
-            pass
+        if f.frecuencia >= 2:
+            listaCaracteres.append(TablaFrecuencia(f.dato,0))
+    print(listaCaracteres)
+
+    for m in range(len(mensaje)-2):
+        for n in listaCaracteres:
+            if len(n.frecuencia) == 2:
+                print("binomial")
+
+            elif len(n.dato) == 3 :
+                if n.dato[0] == mensaje[m] and n.dato[1] == mensaje[m+1]:
+                    n.frecuencia += 1
+                elif n.dato[1] == mensaje[m+1] and n[2] == mensaje[m+2]:
+                    n.frecuencia += 1
+                elif n[0] == mensaje[m] and n[2] == mensaje[m+2]:
+                    n.frecuencia += 1
+    
+    imprimirTablaAsignacion(listaCaracteres)
+                    
+
+        
+
 
 def imprimirTablaAsignacion(caracteres):
     print("********************************************************")
     for i in range(len(caracteres)):
         print("[",caracteres[i].dato,"][",caracteres[i].frecuencia,"][",caracteres[i].asignacion ,"]")
     print("********************************************************")
+
 
 mensajeEncriptado = "53‡‡†305))6*;4826)4‡.)4‡);806*;48†8¶60))85;1‡(;:‡*8†83(88)5*†;46(;88*96*?;8)*‡(;485);5*†2:*‡(;4956*2(5*—4)8¶8*;4069285);)6†8)4‡‡;1(‡9;48081;8:8‡1;48†85;4)485†528806*81(‡9;48;(88;4(‡?34;48)4‡;161;:188;‡?;"
 # tablaCaracteres = "ethosnairdflbmgyuvpc"
@@ -86,11 +111,12 @@ caracteresOrdenados = ordenarCaracteres(caracteresOriginales)
 #imprimirTablaAsignacion(caracteresOrdenados)
 asignarCaracter(caracteresOrdenados,tablaCaracteres)
 asignarCaracter(caracteresOrdenados,tablaCaracteres)
-imprimirTablaAsignacion(caracteresOrdenados)
-frecuenciaTabla(caracteresOrdenados,tablaTrigramas)
-frecuenciaTabla(caracteresOrdenados,tablaBigramas)
-print(tablaCaracteres)
-
-
+# imprimirTablaAsignacion(caracteresOrdenados)
+caracteresTrigrama = frecuenciaTabla(caracteresOrdenados,tablaTrigramas)
+caracteresBigrama = frecuenciaTabla(caracteresOrdenados,tablaBigramas)
+#print(tablaCaracteres)
+mensajeEncriptado = desencriptar(mensajeEncriptado,caracteresOrdenados)
+asignarCaracteres(mensajeEncriptado,caracteresTrigrama)
+# asignarCaracteres(mensajeEncriptado,caracteresBigrama)
 #codigo = asignarCaracteres(caracteres,tablaCaracteres)
-desencriptar(mensajeEncriptado,caracteresOrdenados)
+# desencriptar(mensajeEncriptado,caracteresOrdenados)
